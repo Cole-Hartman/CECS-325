@@ -3,8 +3,8 @@
 #include <functional>
 #include <iostream>
 #include <random>
-#ifndef DECK
-#define DECK
+#ifndef DECK_H
+#define DECK_H
 
 class Deck {
 private:

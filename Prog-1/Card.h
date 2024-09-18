@@ -1,7 +1,7 @@
 #include <functional>
 #include <iostream>
-#ifndef CARD
-#define CARD
+#ifndef CARD_H
+#define CARD_H
 
 class Card {
 public:
