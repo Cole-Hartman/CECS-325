@@ -1,12 +1,19 @@
+#include "Card.h"
+#include <algorithm>
 #include <functional>
 #include <iostream>
-using namespace std;
+#include <random>
+#define DECK_H
 
 class Deck {
+private:
+  static const int deckSize = 52;
+  Card cards[deckSize];
+  int currentCard = 51;
 
 public:
-  Deck()             // constructor which creates a deck of 52 cards
-      Card deal()    // deal a card
-      void print()   // show all the cards in the deck
-      void shuffle() // shuffle the cards in the deck
+  Deck();
+  Card deal();
+  void print();
+  void shuffle();
 };
