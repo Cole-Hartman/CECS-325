@@ -1,3 +1,17 @@
+/*
+ * Honor Statement
+ *
+ * Name: Cole Hartman
+ * Course: CECS 325
+ * Assignment: Project 1
+ *
+ * I, Cole Hartman, declare that all work presented in this assignment is my
+ * own, and I have properly acknowledged all external sources (if any) that were
+ * used.
+ *
+ * Signed: Cole Hartman
+ */
+
 #include "Deck.h"
 #include <iostream>
 #include <ostream>
