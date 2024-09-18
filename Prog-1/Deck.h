@@ -3,7 +3,8 @@
 #include <functional>
 #include <iostream>
 #include <random>
-#define DECK_H
+#ifndef DECK
+#define DECK
 
 class Deck {
 private:
@@ -17,3 +18,5 @@ public:
   void print();
   void shuffle();
 };
+
+#endif

@@ -1,6 +1,7 @@
 #include <functional>
 #include <iostream>
-#define CARD_H
+#ifndef CARD
+#define CARD
 
 class Card {
 public:
@@ -12,3 +13,5 @@ public:
   void print();
   int compare(Card card2);
 };
+
+#endif
