@@ -8,13 +8,7 @@ public:
   char rank;
 
   Card(char r, char s);
-
   Card();
-
   void print();
-
-  // Return 1 for win, 0 for tie, -1 for lose
-  // int compare(Card) {
-  //   // pass
-  // }
+  int compare(Card card2);
 };

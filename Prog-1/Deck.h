@@ -9,7 +9,7 @@ class Deck {
 private:
   static const int deckSize = 52;
   Card cards[deckSize];
-  int currentCard = 51;
+  int currentCard = 0;
 
 public:
   Deck();

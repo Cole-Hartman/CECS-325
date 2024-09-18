@@ -2,11 +2,10 @@
 #include <cstdlib>
 #include <time.h>
 
-// constructor which creates a deck of 52 cards
 Deck::Deck() {
   int index = 0;
   std::string ranks = "A23456789TJQK";
-  std::string suits = "SCDH";
+  std::string suits = "CSDH";
 
   // for char in suits
   for (char s : suits) {
@@ -26,17 +25,15 @@ Card Deck::deal() {
 // show all the cards in the deck
 void Deck::print() {
   for (Card c : cards) {
-    std::cout << c.rank << c.suit;
+    c.print();
   }
 }
 
 // shuffle the cards in the deck
 void Deck::shuffle() {
-  for (int i; i < 52; i++) {
-    srand(time(0));
-    int num = rand() % 52;
-    Card store = cards[i];
-    cards[i] = cards[num];
-    cards[num] = store;
+  srand(time(nullptr)); // seed the random number generator
+  for (int i = 51; i > 0; i--) {
+    int j = std::rand() % (i + 1);
+    std::swap(cards[i], cards[j]);
   }
 }
