@@ -1,7 +1,7 @@
 // Name: Cole Hartman
-// Class (CECS 325-01)
-// Project Name (Prog 1 – Counting Letters)
-// Due Date 19/9/24
+// Class (CECS 325-02)
+// Project Name (Prog 2 – More War)
+// Due Date 10/01/24
 //
 // I certify that this program is my own original work. I did not copy any part
 // of this program from any other source. I further certify that I typed each
@@ -11,9 +11,6 @@
 #include <iostream>
 #include <time.h>
 using namespace std;
-
-#ifndef WAR_H
-#define WAR_H
 
 class Card {
 private:
@@ -27,12 +24,6 @@ public:
     suit = s;
   }
 
-  // default constructor, needed for array
-  Card() {
-    rank = '0';
-    suit = '0';
-  }
-
   // display the card
   void print() {
     if (rank == 'T') {
@@ -43,7 +34,7 @@ public:
     cout << suit << ",";
   }
 
-  // compare cards
+  // compare cards, 1 for win, 0 for tie, -1 for lose
   int compare(Card card2) {
     char ranks[] = {'A', '2', '3', '4', '5', '6', '7',
                     '8', '9', 'T', 'J', 'Q', 'K'};
@@ -92,7 +83,7 @@ public:
       }
     }
   }
-  // deal a card
+  // deal a card if you can, OTHERWISE RAISE AN EXCEPTION
   Card deal() {
     Card card = cards[currentCard];
     currentCard++;
@@ -114,6 +105,11 @@ public:
       swap(cards[i], cards[j]);
     }
   }
+
+  // return true if deck is empty
+  void isEmtpy() {
+    // pass
+  }
 };
 
 int main() {
@@ -127,6 +123,11 @@ int main() {
   cin >> player2;
   cout << endl;
 
+  int numgames;
+  cout << "How many games will they play: ";
+  cin >> numgames;
+  cout << endl;
+
   cout << "Original Deck" << endl;
   deck.print();
   cout << endl;
@@ -137,11 +138,11 @@ int main() {
   cout << endl;
   cout << endl;
 
-  // Play 26 games
+  // Play (numgames) games
   int player1_wins = 0;
   int player2_wins = 0;
   int ties = 0;
-  for (int i = 1; i < 27; i++) {
+  for (int i = 1; i < numgames + 1; i++) {
     cout << "Game " << i << endl;
     cout << "--------" << endl;
 
@@ -179,5 +180,3 @@ int main() {
 
   return 0;
 }
-
-#endif
