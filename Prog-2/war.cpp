@@ -9,7 +9,9 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <stdexcept>
 #include <time.h>
+#include <vector>
 using namespace std;
 
 class Card {
@@ -67,27 +69,37 @@ class Deck {
 
 private:
   static const int deckSize = 52;
-  Card cards[deckSize];
+  vector<Card> cards;
   int currentCard = 0;
 
 public:
   Deck() {
-    int index = 0;
     string ranks = "A23456789TJQK";
     string suits = "CSDH";
 
     // for char in suits
     for (char s : suits) {
       for (char r : ranks) {
-        cards[index++] = Card(r, s);
+        cards.push_back(Card(r, s));
       }
     }
   }
+
   // deal a card if you can, OTHERWISE RAISE AN EXCEPTION
   Card deal() {
-    Card card = cards[currentCard];
-    currentCard++;
-    return card;
+    try {
+      Card card = cards[currentCard];
+      currentCard++;
+      return card;
+
+      throw 505;
+    } catch (...) {
+      cout << "No more cards";
+    }
+
+    // if (currentCard >= deckSize) {
+    //   throw runtime_error("No more cards to deal.");
+    // }
   }
 
   // show all the cards in the deck
@@ -107,9 +119,7 @@ public:
   }
 
   // return true if deck is empty
-  void isEmtpy() {
-    // pass
-  }
+  bool isEmtpy() { return currentCard >= deckSize; }
 };
 
 int main() {
@@ -143,10 +153,11 @@ int main() {
   int player2_wins = 0;
   int ties = 0;
   for (int i = 1; i < numgames + 1; i++) {
+    Card deal1 = deck.deal();
+
     cout << "Game " << i << endl;
     cout << "--------" << endl;
 
-    Card deal1 = deck.deal();
     cout << "      " << player1 << "=>";
     deal1.print();
     cout << endl;
