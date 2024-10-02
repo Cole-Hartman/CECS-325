@@ -7,10 +7,11 @@
 // of this program from any other source. I further certify that I typed each
 // and every line of code in this program.
 
+#include <algorithm>
 #include <cstdlib>
 #include <iostream>
+#include <random>
 #include <stdexcept>
-#include <time.h>
 #include <vector>
 using namespace std;
 
@@ -68,9 +69,7 @@ public:
 class Deck {
 
 private:
-  static const int deckSize = 52;
   vector<Card> cards;
-  int currentCard = 0;
 
 public:
   Deck() {
@@ -80,26 +79,19 @@ public:
     // for char in suits
     for (char s : suits) {
       for (char r : ranks) {
-        cards.push_back(Card(r, s));
+        cards.emplace_back(r, s);
       }
     }
   }
 
-  // deal a card if you can, OTHERWISE RAISE AN EXCEPTION
+  // deal a card, if deck is empty then raise exception
   Card deal() {
-    try {
-      Card card = cards[currentCard];
-      currentCard++;
-      return card;
-
-      throw 505;
-    } catch (...) {
-      cout << "No more cards";
+    if (isEmpty()) {
+      throw runtime_error("Deck is empty");
     }
-
-    // if (currentCard >= deckSize) {
-    //   throw runtime_error("No more cards to deal.");
-    // }
+    Card card = cards.back();
+    cards.pop_back();
+    return card;
   }
 
   // show all the cards in the deck
@@ -111,15 +103,13 @@ public:
 
   // shuffle the cards in the deck
   void shuffle() {
-    srand(time(nullptr)); // seed the random number generator
-    for (int i = 51; i > 0; i--) {
-      int j = rand() % (i + 1);
-      swap(cards[i], cards[j]);
-    }
+    random_device rd;
+    mt19937 g(rd());
+    std::shuffle(cards.begin(), cards.end(), g);
   }
 
   // return true if deck is empty
-  bool isEmtpy() { return currentCard >= deckSize; }
+  bool isEmpty() { return cards.empty(); }
 };
 
 int main() {
@@ -131,7 +121,6 @@ int main() {
   cin >> player1;
   cout << "Enter the name of the second player: ";
   cin >> player2;
-  cout << endl;
 
   int numgames;
   cout << "How many games will they play: ";
@@ -153,33 +142,40 @@ int main() {
   int player2_wins = 0;
   int ties = 0;
   for (int i = 1; i < numgames + 1; i++) {
-    Card deal1 = deck.deal();
+    Card deal1(0, 0);
+    try {
+      deal1 = deck.deal();
 
-    cout << "Game " << i << endl;
-    cout << "--------" << endl;
+      cout << "Game " << i << endl;
+      cout << "--------" << endl;
 
-    cout << "      " << player1 << "=>";
-    deal1.print();
-    cout << endl;
+      cout << "      " << player1 << "=>";
+      deal1.print();
+      cout << endl;
 
-    Card deal2 = deck.deal();
-    cout << "      " << player2 << "=>";
-    deal2.print();
-    cout << endl;
+      Card deal2 = deck.deal();
+      cout << "      " << player2 << "=>";
+      deal2.print();
+      cout << endl;
 
-    // compute winner
-    int res = deal1.compare(deal2);
-    if (res == 1) {
-      player1_wins++;
-      cout << player1 << "=> Winner" << endl;
-    } else if (res == -1) {
-      player2_wins++;
-      cout << player2 << "=> Winner" << endl;
-    } else if (res == 0) {
-      ties++;
-      cout << "Tie game" << endl;
+      // compute winner
+      int res = deal1.compare(deal2);
+      if (res == 1) {
+        player1_wins++;
+        cout << player1 << "=> Winner" << endl;
+      } else if (res == -1) {
+        player2_wins++;
+        cout << player2 << "=> Winner" << endl;
+      } else if (res == 0) {
+        ties++;
+        cout << "Tie game" << endl;
+      }
+      cout << endl;
+
+    } catch (const runtime_error &e) {
+      cout << "Error - " << e.what() << endl;
+      break;
     }
-    cout << endl;
   }
 
   // final stats
