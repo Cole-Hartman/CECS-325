@@ -8,5 +8,8 @@
 # 	rm *.o output
 #
 
-output: generate.cpp
-	g++ generate.cpp -o output
+generate: generate.cpp
+	g++ generate.cpp -o generate
+
+clean:
+	rm *.o generate
