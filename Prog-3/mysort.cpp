@@ -21,7 +21,7 @@ void bubble(int A[], int size) {
   for (int i = 0; i < size - 1; i++) {
     for (int j = 0; j < size - 1; j++) {
       if (A[j] > A[j + 1]) {
-        int temp = A[j + 1];
+        int temp = A[j];
         A[j] = A[j + 1];
         A[j + 1] = temp;
       }
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
   // call bubble
   bubble(numbers, count);
 
-  for (int i = 0; i < count - 1; i++) {
+  for (int i = 0; i < count; i++) {
     fout << numbers[i] << endl;
   }
 

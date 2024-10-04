@@ -6,9 +6,10 @@
 #	$ sortrace.sh >> sortrace.log &      # this may take an hour
 #----------------------------------------------------------------------------------------------
 #
-echo Generating 10 random numbers
+echo Generating 1000000 random numbers
 sleep 1
-./generate 10 0 50	# you have to write generate.cpp
+# ./generate 1000000 -100000 100000
+./generate 50 -200 500
 sleep 1
 echo Starting system sort
 sleep 1
@@ -16,10 +17,10 @@ sleep 1
 sleep 1
 echo Starting mysort
 echo Array bubble sort with 1000000 items
+echo Ending bubble sort
 sleep 1
 { time ./mysort numbers.dat mysort.out; } 2>&1>> sortrace.log
 sleep 1
-echo Ending bubble sort
 wc mysort.out
 sort -c -n mysort.out 2>> sortrace.log # verify file is sorted 
 
