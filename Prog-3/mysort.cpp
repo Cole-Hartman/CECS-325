@@ -18,6 +18,7 @@ using namespace std;
 const int MAX_SIZE = 1000000;
 
 void bubble(int A[], int size) {
+  cout << "Starting Array bubble sort with 1000000 items" << endl;
   for (int i = 0; i < size - 1; i++) {
     for (int j = 0; j < size - 1; j++) {
       if (A[j] > A[j + 1]) {
@@ -27,6 +28,7 @@ void bubble(int A[], int size) {
       }
     }
   }
+  cout << "Ending bubble sort" << endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -40,7 +42,7 @@ int main(int argc, char *argv[]) {
   fin.open(argv[1]);
   // open the second argument, set output file, if file exists, write over
   fout.open(argv[2], ios::out | ios::trunc);
-  while (fin >> n) {
+  while (fin >> n && count < MAX_SIZE) {
     numbers[count] = n;
     count++; // insert a number into the array and increase the index
   }
@@ -54,9 +56,6 @@ int main(int argc, char *argv[]) {
 
   fout.close();
   fin.close();
-
-  cout << count << " numbers transferred from " << argv[1] << " to " << argv[2]
-       << endl;
 
   return 0;
 }
