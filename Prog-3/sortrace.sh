@@ -15,9 +15,11 @@ sleep 1
 { time sort -n numbers.dat > systemsort.out; } 2>&1>> sortrace.log
 sleep 1
 echo Starting mysort
+echo Array bubble sort with 1000000 items
 sleep 1
-{ time ./mysort numbers.dat sort.out; } 2>&1>> sortrace.log
+{ time ./mysort numbers.dat mysort.out; } 2>&1>> sortrace.log
 sleep 1
+echo Ending bubble sort
 wc mysort.out
 sort -c -n mysort.out 2>> sortrace.log # verify file is sorted 
 

@@ -13,22 +13,43 @@ using namespace std;
 
 // read numbers from input file numbers.dat, sort, write sorted numbers to
 // output file.
-
 // example: ./mysort numbers.dat testsort.dat
+
+const int MAX_SIZE = 1000000;
+
+void bubble(int A[], int size) {
+  for (int i = 0; i < size - 1; i++) {
+    for (int j = 0; j < size - 1; j++) {
+      if (A[j] > A[j + 1]) {
+        int temp = A[j + 1];
+        A[j] = A[j + 1];
+        A[j + 1] = temp;
+      }
+    }
+  }
+}
+
 int main(int argc, char *argv[]) {
 
   ifstream fin;
   ofstream fout;
   int n;
   int count = 0;
+  int numbers[MAX_SIZE];
 
-  // open the first argument
   fin.open(argv[1]);
   // open the second argument, set output file, if file exists, write over
   fout.open(argv[2], ios::out | ios::trunc);
   while (fin >> n) {
-    fout << n << endl;
+    numbers[count] = n;
     count++; // insert a number into the array and increase the index
+  }
+
+  // call bubble
+  bubble(numbers, count);
+
+  for (int i = 0; i < count - 1; i++) {
+    fout << numbers[i] << endl;
   }
 
   fout.close();
@@ -36,5 +57,6 @@ int main(int argc, char *argv[]) {
 
   cout << count << " numbers transferred from " << argv[1] << " to " << argv[2]
        << endl;
+
   return 0;
 }
