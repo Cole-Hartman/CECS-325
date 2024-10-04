@@ -14,6 +14,7 @@ using namespace std;
 // read numbers from input file numbers.dat, sort, write sorted numbers to
 // output file.
 
+// example: ./mysort numbers.dat testsort.dat
 int main(int argc, char *argv[]) {
 
   ifstream fin;
@@ -21,7 +22,9 @@ int main(int argc, char *argv[]) {
   int n;
   int count = 0;
 
+  // open the first argument
   fin.open(argv[1]);
+  // open the second argument, set output file, if file exists, write over
   fout.open(argv[2], ios::out | ios::trunc);
   while (fin >> n) {
     fout << n << endl;
@@ -29,4 +32,9 @@ int main(int argc, char *argv[]) {
   }
 
   fout.close();
+  fin.close();
+
+  cout << count << " numbers transferred from " << argv[1] << " to " << argv[2]
+       << endl;
+  return 0;
 }
