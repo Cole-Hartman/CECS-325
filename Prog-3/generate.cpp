@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
   }
 
   for (int i = 0; i < argc; i++) {
-    cout << argv[i] << endl;
+    cout << "argv[" << i << "] " << argv[i] << endl;
   }
 
   int COUNT = stoi(argv[1]);
